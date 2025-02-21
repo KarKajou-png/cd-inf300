@@ -5,7 +5,7 @@ on:
     branches: ['main']
 
 jobs:
-  python linter:
+  python_linter:
     name: python linter
     runs-on: ubuntu-latest
     steps:
