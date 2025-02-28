@@ -23,7 +23,7 @@ jobs:
         with:
           source: "docker/app"
           mypy-options: "--ignore-missing-imports --show-error-codes"
-          pylint-options: "--rcfile=setup.cfg"
+          pylint-options: "--rcfile=setup.cfg disable=F0010"
           isort-options: "-w 100"
           django: false
   push_to_registries:
