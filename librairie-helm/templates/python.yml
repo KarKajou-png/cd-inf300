@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-python
+labels:
+  app: python
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: python
+    spec:
+      containers:
+      - name: harbor.kakor.ovh/ipi/groupe1:sha-5e624c0
+        ports:
+        - containerPort: 5000
