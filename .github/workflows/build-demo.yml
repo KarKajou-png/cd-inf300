@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Docker container
-        run: docker login harbor.kakor.ovh --username=ipi --password="${{ secrets.password_harbor }}" && docker run -d -p 5000:5000 --name flask harbor.kakor.ovh/ipi/groupe-1:sha-7dee7c7
+        run: docker login harbor.kakor.ovh --username=ipi --password="${{ secrets.password_harbor }}" && docker run -d -p 5000:5000 --name flask harbor.kakor.ovh/ipi/groupe-1:sha-5e624c0
       - name: test flask
         run: |
           curl -I http://127.0.0.1:5000
