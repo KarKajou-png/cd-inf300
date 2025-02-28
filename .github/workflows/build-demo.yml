@@ -66,7 +66,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run Docker container
-        run: docker login harbor.kakor.ovh --username=ipi --password="${{ secrets.password_harbor }}" && docker images && docker run -d -p 8080:80 --name flask groupe-1:sha-7dee7c7
+        run: docker login harbor.kakor.ovh --username=ipi --password="${{ secrets.password_harbor }}" && docker images harbor.kakor.ovh && docker run -d -p 8080:80 --name flask groupe-1:sha-7dee7c7
       - name: test flask
         run: "curl --header 'Content-Type: application/json' http://localhost:5000/librairie/livres -d '{'titre': 'DevSecOps DEAVSETS', 'auteur': 'Jordan Assouline'}'"
   test_docker:
