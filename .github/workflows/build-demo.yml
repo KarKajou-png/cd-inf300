@@ -80,7 +80,7 @@ jobs:
           oc_version: '4.6'
   # Now, oc is available for the rest of these steps.
       - name: Run Docker container
-        run: oc login --token=sha256~t4-NPXtDxDCLcYK8pm7AHeiMENrytniFgaztxCy3oNU --server=https://api.openshift.kakor.ovh:6443
+        run: oc login --token=sha256~t4-NPXtDxDCLcYK8pm7AHeiMENrytniFgaztxCy3oNU --server=https://api.openshift.kakor.ovh:6443 --insecure-skip-tls-verify
       - name: test flask
         run: |
           helm upgrade --install groupe-1 librairie-helm/ --set image=harbor.kakor.ovh/ipi/groupe-1:sha-5e624c0
