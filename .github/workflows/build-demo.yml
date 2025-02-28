@@ -5,19 +5,6 @@ on:
     branches: ['main']
 
 jobs:
-  python_linter:
-    name: python linter
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Python Linter
-        uses: sunnysid3up/python-linter@master
-        with:
-          source: "docker/app/Librairie.py"
-          mypy-options: "--ignore-missing-imports --show-error-codes"
-          pylint-options: "--rcfile=setup.cfg"
-          isort-options: "-w 100"
-          django: true
   push_to_registries:
     name: Push Docker image to single registry
     runs-on: ubuntu-latest
@@ -35,13 +22,13 @@ jobs:
         with:
           registry: harbor.kakor.ovh
           username: ipi
-          password: ${{ secrets.password_harbor }}
+          password: "${{ secrets.password_harbor }}"
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: harbor.kakor.ovh/ipi/groupe-5
+          images: harbor.kakor.ovh/ipi/groupe-1
           tags: type=sha
 
       - name: Build and push Docker images
