@@ -74,13 +74,13 @@ jobs:
           uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
           with:
             images: harbor.kakor.ovh/ipi/groupe-1
-            tags: type=sha
+            tags: latest
         - name: Run the test process with Docker
           uses: addnab/docker-run-action@v3
           with:
             registry: harbor.kakor.ovh
             username: ipi
             password: "${{ secrets.password_harbor }}"
-            image: ipi/groupe-1:${{ steps.meta.outputs.tags }}
+            image: ipi/groupe-1:latest
             run: |
               curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
