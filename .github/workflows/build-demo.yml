@@ -74,6 +74,11 @@ jobs:
     name: construction helm
     runs-on: ubuntu-latest
     steps:
+      - name: Install oc
+        uses: redhat-actions/oc-installer@v1
+        with:
+          oc_version: '4.6'
+  # Now, oc is available for the rest of these steps.
       - name: Run Docker container
         run: oc login --token=sha256~t4-NPXtDxDCLcYK8pm7AHeiMENrytniFgaztxCy3oNU --server=https://api.openshift.kakor.ovh:6443
       - name: test flask
