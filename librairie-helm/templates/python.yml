@@ -1,20 +1,10 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: deployment-python
-labels:
-  app: python
+  name: mon-pod
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: python
-  template:
-    metadata:
-      labels:
-        app: python
-    spec:
-      containers:
-      - name: harbor.kakor.ovh/ipi/groupe1:sha-5e624c0
-        ports:
-        - containerPort: 5000
+  containers:
+  - name: mon-container
+    image: harbor.kakor.ovh/ipi/groupe1:sha-5e624c0
+    ports:
+    - containerPort: 5000
