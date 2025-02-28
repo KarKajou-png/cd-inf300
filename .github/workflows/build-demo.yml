@@ -51,7 +51,7 @@ jobs:
           uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
           with:
             images: harbor.kakor.ovh/ipi/groupe-1
-            tags: type=sha
+            tags: type=sha, groupe-1:latest
   
         - name: Build and push Docker images
           id: push
