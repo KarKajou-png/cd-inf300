@@ -59,31 +59,23 @@ jobs:
           with:
             context: ./docker/
             push: true
-            tags: app=1.0.0
+            tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
   test_api:
     name: Test image api
     runs-on: ubuntu-latest
     steps:
       - name: Run Docker container
-        run: docker login harbor.kakor.ovh --username=ipi --password="${{ secrets.password_harbor }}" && docker run -d -p 5000:5000 --name flask harbor.kakor.ovh/ipi/groupe-1:sha-5e624c0
+        run: docker run -d -p 5000:5000 --name flask harbor.kakor.ovh/ipi/groupe-1:sha-5e624c0
       - name: test flask
         run: |
           sleep 10 && curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
-#  test_docker:
-#      name: testing a random route
-#      runs-on: ubuntu-latest
-#      needs: push_to_registries
-#      steps:
-#        - name: Check out the repo
-#          uses: actions/checkout@v2
-#        - name: Run the test process with Docker
-#          uses: addnab/docker-run-action@v3
-#          with:
-#            registry: harbor.kakor.ovh
-#            username: ipi
-#            password: "${{ secrets.password_harbor }}"
-#            image: harbor.kakor.ovh/ipi/groupe-1:1.0.0
-#            options: -d -p 5000:5000
-#            run: |
-#              curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
+  run_helm:
+    name: construction helm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Docker container
+        run: oc login --token=sha256~t4-NPXtDxDCLcYK8pm7AHeiMENrytniFgaztxCy3oNU --server=https://api.openshift.kakor.ovh:6443
+      - name: test flask
+        run: |
+          helm upgrade --install groupe-1 librairie-helm/ --set image=harbor.kakor.ovh/ipi/groupe-1:sha-5e624c0
