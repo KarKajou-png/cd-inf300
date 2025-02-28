@@ -68,7 +68,7 @@ jobs:
       - name: Run Docker container
         run: docker run -d -p 8080:80 --name flask ipi/groupe-1:sha-7dee7c7
       - name: test flask
-        run: curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
+        run: "curl --header 'Content-Type: application/json' http://localhost:5000/librairie/livres -d '{'titre': 'DevSecOps DEAVSETS', 'auteur': 'Jordan Assouline'}'"
   test_docker:
       name: testing a random route
       runs-on: ubuntu-latest
