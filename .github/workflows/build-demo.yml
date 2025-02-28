@@ -62,6 +62,7 @@ jobs:
             tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
   test_api:
+    needs: push_to_registries
     name: Test image api
     runs-on: ubuntu-latest
     steps:
@@ -71,6 +72,7 @@ jobs:
         run: |
           sleep 10 && curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
   run_helm:
+    needs: test_api
     name: construction helm
     runs-on: ubuntu-latest
     steps:
