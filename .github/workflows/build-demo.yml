@@ -69,15 +69,12 @@ jobs:
       steps:
         - name: Check out the repo
           uses: actions/checkout@v2
-        - name: Log in to the Container registry
-          uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        - name: Run the test process with Docker
+          uses: addnab/docker-run-action@v3
           with:
             registry: harbor.kakor.ovh
             username: ipi
             password: "${{ secrets.password_harbor }}"
-        - name: Run the test process with Docker
-          uses: addnab/docker-run-action@v3
-          with:
-              image: harbor.kakor.ovh/ipi/groupe-1:latest
-              run: |
-                curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
+            image: harbor.kakor.ovh/ipi/groupe-1:latest
+            run: |
+              curl --header "Content-Type: application/json" http://localhost:5000/librairie/livres -d '{"titre": "DevSecOps DEAVSETS", "auteur": "Jordan Assouline"}'
