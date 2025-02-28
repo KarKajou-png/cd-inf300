@@ -65,6 +65,12 @@ jobs:
     name: Test image api
     runs-on: ubuntu-latest
     steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: harbor.kakor.ovh
+          username: ipi
+          password: "${{ secrets.password_harbor }}"
       - name: Run Docker container
         run: docker run -d -p 8080:80 --name flask ipi/groupe-1:sha-7dee7c7
       - name: test flask
